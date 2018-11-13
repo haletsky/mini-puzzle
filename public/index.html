@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #eee;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        height: 75vh;
+        width: 75vh;
+        margin: 0 auto;
+        margin-top: 12vh;
+        box-shadow: 0px 5px 10px #bbb;
+        border-radius: 10px;
+        vertical-align: middle;
+      }
+
+      .row {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: stretch;
+      }
+
+      .button {
+        flex: 1;
+        border: 1px solid #eee;
+        background-color: white;
+      }
+
+      #b5 {
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div id="b1" class="button"></div>
+        <div id="b4" class="button"></div>
+        <div id="b7" class="button"></div>
+      </div>
+      <div class="row">
+        <div id="b2" class="button"></div>
+        <div id="b5" class="button"></div>
+        <div id="b8" class="button"></div>
+      </div>
+      <div class="row">
+        <div id="b3" class="button"></div>
+        <div id="b6" class="button"></div>
+        <div id="b9" class="button"></div>
+      </div>
+    <div>
+
+    <script>
+      const primaryColor = 'white'
+      const secondaryColor = 'rgb(51, 51, 51)'
+      const buttons = [1,2,3,4,5,6,7,8,9].map((_, i) => document.getElementById('b' + (i + 1)))
+      const setUpButton = (button, nextButton, prevButton) => {
+        buttons[button].next = buttons[nextButton]
+        buttons[button].prev = buttons[prevButton]
+        buttons[button].changeColor = function () {
+          this.style.backgroundColor =
+            this.style.backgroundColor === secondaryColor
+              ? primaryColor
+              : secondaryColor;
+        }
+        buttons[button].onclick = function () {
+          this.changeColor()
+          this.next.changeColor()
+          this.prev.changeColor()
+        }
+      }
+
+      setUpButton(0, 1, 3)
+      setUpButton(1, 0, 2)
+      setUpButton(2, 5, 1)
+      setUpButton(3, 6, 0)
+      setUpButton(5, 8, 2)
+      setUpButton(6, 7, 3)
+      setUpButton(7, 8, 6)
+      setUpButton(8, 7, 5)
+    </script>
+  </body>
+</html>
